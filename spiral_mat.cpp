@@ -43,25 +43,50 @@ vector<int> spiralOrder01(vector<vector<int>>& matrix) {
 vector<int> spiralOrder02(vector<vector<int>>& matrix)
 {   int len = matrix.size();
     int curr_r = 0, curr_c = 0, curr_r_len = len, curr_c_len = matrix[0].size();
-    int flag = 0;
+    int r = 1, d = 0, u = 0, l = 0;
     vector<int> sp;
     while(curr_c_len != 0 && curr_r_len != 0){
-    if (flag % 2 == 0){
+    if (r == 1){
         for(; curr_c < curr_c_len; curr_c++)
         {
+            cout<<" r = 1 -> curr_r: "<<curr_r<<" "<<"curr_c: "<<curr_c<<"\n";
+            cout<<"curr_r_len: "<<curr_r_len<<"\n";
             sp.push_back(matrix[curr_r][curr_c]);
         }
         curr_c_len--;
         curr_r ++; curr_c--;
-        flag++;
-    }
-    else{
-        for(int i = curr_r; i < curr_r_len; i++)
-        {
-            sp.push_back(matrix[i][curr_c]);
+        r = 0; d = 1;
         }
-        curr_r_len--; curr_r--;
-        flag++;
+    else if(d == 1){
+        for(; curr_r < curr_r_len; curr_r++)
+        {
+            cout<<" d = 1 -> curr_r: "<<curr_r<<" "<<"curr_c: "<<curr_c<<"\n";
+            cout<<"curr_r_len: "<<curr_r_len<<"\n";
+            sp.push_back(matrix[curr_r][curr_c]);
+        }
+        curr_r_len--; curr_r--; curr_c--;
+        d = 0; l = 1;
+    }
+    else if (l == 1)
+    {
+        for(; curr_c >= 0; curr_c--)
+        {
+            cout<<" l = 1 -> curr_r: "<<curr_r<<" "<<"curr_c: "<<curr_c<<"\n";
+            sp.push_back(matrix[curr_r][curr_c]);
+        }
+        curr_r--;curr_c++;
+        curr_c_len--;
+        l = 0; u = 1;
+    }
+    else if(u == 1)
+    {
+        for(;curr_r > 0; curr_r--)
+        {
+            cout<<" u = 1 -> curr_r: "<<curr_r<<" "<<"curr_c: "<<curr_c<<"\n";
+            sp.push_back(matrix[curr_r][curr_c]);
+        }
+        curr_r++; curr_r_len--; curr_c++; curr_c_len++;
+        u = 0; r = 1;
     }
     }
     return sp;
@@ -69,8 +94,16 @@ vector<int> spiralOrder02(vector<vector<int>>& matrix)
 int main()
 {
     vector<vector<int>> m1 = {{1,2,3}, {4,5,6}, {7,8,9}};
-    vector<int> ma1 = spiralOrder01(m1);
-    vector<int> ma2 = spiralOrder02(m1);
-    for (int x: ma2) cout<<x<<" ";
+    vector<vector<int>> m2 = {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}};
+    vector<vector<int>> m3 = {{3}, {2}};
+    // vector<int> ma1 = spiralOrder01(m1);
+    // vector<int> ma02 = spiralOrder02(m1);
+    // vector<int> ma2 = spiralOrder02(m2);
+    vector<int> ma3 = spiralOrder02(m3);
+    // for (int x: ma02) cout<<x<<" ";
+    // cout<<"\n";
+    // for (int x: ma2) cout<<x<<" ";
+    // cout<<"\n";
+    for (int x: ma3) cout<<x<<" ";
     return 0;
 }
