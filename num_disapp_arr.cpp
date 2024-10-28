@@ -24,7 +24,7 @@ vector<int> findDisappearedNumbers(vector<int>& nums) {
         //     if(it == nums.end()) num_disappear.push_back(j);
         //  }
 
-        //3rd method
+        //3rd method ->frequency concept
         for(int x: nums) num_count[x]++;
         for(int i = 1; i <= len; i++)
         {
