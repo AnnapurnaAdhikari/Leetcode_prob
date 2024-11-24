@@ -14,7 +14,6 @@ int calPoints(vector<string>& operations)
     vector<int> record;
     for(int i = 0; i < operations.size(); i++)
     {
-        int prev;
         if(operations[i] == "C") record.pop_back();
         else if(operations[i] == "D") record.push_back(record[record.size() - 1]*2);
         else if(operations[i] == "+") record.push_back(record[record.size() -2] + record[record.size() - 1]);
